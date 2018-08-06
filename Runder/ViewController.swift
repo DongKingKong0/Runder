@@ -14,9 +14,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     @IBOutlet weak var locationLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
