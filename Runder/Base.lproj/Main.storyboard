@@ -135,23 +135,50 @@
                                     <action selector="resumeButtonPressed:" destination="6RI-6J-245" eventType="touchUpInside" id="r7q-n1-bYB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10l-wl-p2x">
+                                <rect key="frame" x="141.5" y="279" width="92" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoL-zI-M3m">
+                                <rect key="frame" x="143" y="319" width="89" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="une-iD-Cty">
+                                <rect key="frame" x="153.5" y="359" width="68" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="bottom" secondItem="ks7-2U-Usc" secondAttribute="bottom" constant="32" id="0Vq-gM-bNe"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="bottom" secondItem="IYH-NV-dye" secondAttribute="bottom" constant="32" id="1Pc-xJ-cbt"/>
                             <constraint firstItem="U0J-o5-g4s" firstAttribute="leading" secondItem="NI4-33-Ol5" secondAttribute="leading" constant="32" id="3BJ-6h-Jej"/>
+                            <constraint firstItem="NoL-zI-M3m" firstAttribute="centerY" secondItem="dO7-c2-nIR" secondAttribute="centerY" id="5SE-hQ-Bvq"/>
+                            <constraint firstItem="une-iD-Cty" firstAttribute="centerX" secondItem="dO7-c2-nIR" secondAttribute="centerX" id="NQC-cN-D8N"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="trailing" secondItem="IYH-NV-dye" secondAttribute="trailing" constant="32" id="Oax-cb-VLG"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="trailing" secondItem="pdD-Nf-uou" secondAttribute="trailing" constant="32" id="Pbc-ad-fAb"/>
+                            <constraint firstItem="NoL-zI-M3m" firstAttribute="centerX" secondItem="dO7-c2-nIR" secondAttribute="centerX" id="QIP-Ut-kXA"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="bottom" secondItem="pdD-Nf-uou" secondAttribute="bottom" constant="32" id="QtN-oJ-pNf"/>
+                            <constraint firstItem="une-iD-Cty" firstAttribute="centerY" secondItem="dO7-c2-nIR" secondAttribute="centerY" constant="40" id="R5s-UB-Gct"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="bottom" secondItem="U0J-o5-g4s" secondAttribute="bottom" constant="32" id="UlV-dj-hx3"/>
                             <constraint firstItem="NI4-33-Ol5" firstAttribute="trailing" secondItem="ks7-2U-Usc" secondAttribute="trailing" constant="32" id="V0j-QT-Cmi"/>
+                            <constraint firstItem="10l-wl-p2x" firstAttribute="centerY" secondItem="dO7-c2-nIR" secondAttribute="centerY" constant="-40" id="xBs-bs-SuB"/>
+                            <constraint firstItem="10l-wl-p2x" firstAttribute="centerX" secondItem="dO7-c2-nIR" secondAttribute="centerX" id="xJ0-Cj-LP5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NI4-33-Ol5"/>
                     </view>
                     <connections>
+                        <outlet property="distanceLabel" destination="10l-wl-p2x" id="8gT-Bo-Xwg"/>
+                        <outlet property="durationLabel" destination="NoL-zI-M3m" id="O3e-TW-i2w"/>
                         <outlet property="pauseButton" destination="ks7-2U-Usc" id="k3B-mf-nOq"/>
                         <outlet property="resumeButton" destination="pdD-Nf-uou" id="dK8-nk-2fg"/>
+                        <outlet property="speedLabel" destination="une-iD-Cty" id="3rg-W6-QRf"/>
                         <outlet property="startButton" destination="IYH-NV-dye" id="xtr-3M-kN8"/>
                         <outlet property="stopButton" destination="U0J-o5-g4s" id="X3d-nW-041"/>
                     </connections>
