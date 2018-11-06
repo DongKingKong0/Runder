@@ -2,7 +2,6 @@
 //  ActivityController.swift
 //  Runder
 //
-//  Created by Lorenzo on 06.08.18.
 //  Copyright © 2018 New Image. All rights reserved.
 //
 
@@ -12,12 +11,7 @@ import MapKit
 
 class ActivityController: UIViewController, CLLocationManagerDelegate {
     
-    var coordinates: [[Double]] = []
-    var running: Bool = false
-    
-    var distance: Double = 0.0
-    var duration: Double = 0.0
-    var speed: Double = 0.0
+    let activityRecorder = ActivityRecorder()
     
     let locationManager = CLLocationManager()
     
@@ -32,6 +26,8 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func startButtonPressed(_ sender: Any) {
+        activityRecorder.startActivity()
+        
         print("start")
         
         startButton.isHidden = true
@@ -39,43 +35,40 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
         stopButton.isHidden = false
         
         hideStatLabels()
-        
-        startActivity()
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
+        activityRecorder.stopActivity()
+        
         print("stop")
         
         startButton.isHidden = false
         stopButton.isHidden = true
         pauseButton.isHidden = true
         resumeButton.isHidden = true
-        
-        stopActivity()
     }
     
     @IBAction func pauseButtonPressed(_ sender: Any) {
+        activityRecorder.pauseActivity()
+        
         print("pause")
         
         pauseButton.isHidden = true
         resumeButton.isHidden = false
-        
-        pauseActivity()
     }
     
     @IBAction func resumeButtonPressed(_ sender: Any) {
+        activityRecorder.resumeActivity()
+        
         print("resume")
         
         resumeButton.isHidden = true
         pauseButton.isHidden = false
-        
-        resumeActivity()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         // Round buttons
         setButtonStyle(button: startButton)
@@ -90,14 +83,13 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
         hideStatLabels()
         
         // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
-        
-        // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            //locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
         }
     }
@@ -110,15 +102,11 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        guard let lastLocation = locations.last else { return }
         
-        if running {
-            coordinates.append([locValue.latitude, locValue.longitude, Date().timeIntervalSince1970])
-            print("x: \(locValue.latitude) y: \(locValue.longitude)")
-            print(coordinates[0])
-            print(coordinates)
-            print(Date().timeIntervalSince1970)
-        }
-        //locationLabel.text = "x: \(locValue.latitude) y: \(locValue.longitude)"
+        activityRecorder.locationDidChange(lat: locValue.latitude, long: locValue.longitude, alt: lastLocation.altitude)
+        
+        print("Location updated: lat: \(locValue.latitude) long: \(locValue.longitude) alt: \(lastLocation.altitude)")
     }
     
     
@@ -140,53 +128,17 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
         speedLabel.isHidden = true
     }
     
-    
-    func startActivity() {
-        running = true
-        
-        resetStats()
-    }
-    
-    func stopActivity() {
-        running = false
-        
-        calculateStats()
-        showStats()
-    }
-    
-    func pauseActivity() {
-        running = false
-    }
-    
-    func resumeActivity() {
-        running = true
-    }
-    
-    
-    func calculateStats() {
-        distance = calculateDistance()
-        duration = calculateDuration()
-        speed = calculateSpeed(distance: distance, duration: duration)
-    }
-    
     func showStats() {
-        distanceLabel.text = "Distance: \(roundToDecimalPlaces(value: distance, decimalPlaces: 2)) km"
+        /*distanceLabel.text = "Distance: \(roundToDecimalPlaces(value: distance, decimalPlaces: 2)) km"
         durationLabel.text = "Duration: \(roundToDecimalPlaces(value: duration, decimalPlaces: 2)) min"
         speedLabel.text = "Speed: \(roundToDecimalPlaces(value: speed, decimalPlaces: 2)) km/h"
-        showStatLabels()
+        showStatLabels()*/
     }
     
     
-    func resetStats() {
-        distance = 0.0
-        duration = 0.0
-        speed = 0.0
+    /*func calculateDistance() -> Double {
+        activityRecorder.saveToLocalStorage()
         
-        coordinates = []
-    }
-    
-    
-    func calculateDistance() -> Double {
         var calculatedDistance: Double = 0.0
         
         var lastLat = latToKm(lat: coordinates[0][0])
@@ -243,7 +195,7 @@ class ActivityController: UIViewController, CLLocationManagerDelegate {
         roundedValue.round()
         roundedValue = roundedValue / decimalValue
         return roundedValue
-    }
+    }*/
     
 }
 

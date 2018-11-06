@@ -2,7 +2,8 @@
 //  ViewController.swift
 //  Runder
 //
-//  Created by Lorenzo on 05.08.18.
+//  Main view
+//
 //  Copyright © 2018 New Image. All rights reserved.
 //
 
